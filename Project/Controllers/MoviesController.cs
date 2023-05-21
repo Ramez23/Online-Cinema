@@ -38,13 +38,14 @@ namespace Project.Controllers
 
         public async Task<IActionResult> Booking()
         {
+            ViewBag.acsses = HttpContext.Session.GetString("acsses");
             var viewModel = new BookingViewModel
             {
                 Movies = _context.Movies.ToList(), // Replace with your actual data access code
                 Seats = _context.Seats.ToList(), // Replace with your actual data access code
             };
             return View(viewModel);
-            //ViewBag.acsses = HttpContext.Session.GetString("acsses");
+            
             //return _context.Movies != null ?
             //              View(await _context.Movies.ToListAsync()) :
             //              Problem("Entity set 'ApplicationDBcontext.Movies'  is null.");
