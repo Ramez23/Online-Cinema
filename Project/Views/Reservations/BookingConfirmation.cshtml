@@ -1,0 +1,39 @@
+﻿@model Reservation
+{
+    ViewData["Title"] = "BookingConfirmation";
+
+    if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+
+}
+...
+<div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Booking Confirmation</h2>
+    <p>
+        Thank you for your booking. Here are your details:
+    </p>
+    <ul>
+        <li>Res ID: @((Model.Res_Id != 0) ? Model.Res_Id.ToString() : "1")</li>
+        <li>User ID: @((Model.User_Id != 0) ? Model.User_Id.ToString() : "1")</li>
+        <li>Movie ID: @Model.M_Id</li>
+        <li>Seat ID: @Model.Seat_Id</li>
+        <li>Date: @Model.Date</li>
+        <li>Pay ID: @((Model.Pay_Id != 0) ? Model.Pay_Id.ToString() : "1")</li>
+        <li>Ticket Count: @Model.TicketCount</li>
+        <li>Hall ID: @((Model.Hall_Id != 0) ? Model.Hall_Id.ToString() : "1")</li>
+    </ul>
+    <button id="printButton">Print as PDF</button>
+</div>
+
+<script>
+    document.getElementById('printButton').addEventListener('click', function() {
+        window.print();
+    });
+</script>
+...

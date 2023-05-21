@@ -13,6 +13,7 @@ namespace Project.Controllers
         {
             _context = context;
         }
+       
         public IActionResult Book()
         {
             var viewModel = new BookingViewModel
@@ -33,8 +34,9 @@ namespace Project.Controllers
                 var UserId = await _context.Users.FirstOrDefaultAsync(u => u.Id == reservation.User_Id);
                 var maxPayId = await _context.Reservations.MaxAsync(r => r.Pay_Id);
                 var movie = await _context.Movies.FirstOrDefaultAsync(m => m.Movie_Id == reservation.M_Id);
-          
+
                 var seat = _context.Seats.FirstOrDefault(s => s.Seat_Num == reservation.Seat_Id);
+                var hall = _context.Halls.FirstOrDefault(h => h.Hall_Num == reservation.Hall_Id);
 
                 if (seat.IsSold == false)
                 {
@@ -45,7 +47,7 @@ namespace Project.Controllers
                     seat.IsSold = true;
                     _context.Entry(seat).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Main");
+                    return RedirectToAction("BookingConfirmation", new { id = reservation.Res_Id });
                 }
                 else
                 {
@@ -54,5 +56,19 @@ namespace Project.Controllers
             }
             return View(reservation);
         }
+        public async Task<ActionResult> BookingConfirmation(int id)
+        {
+            // Load the reservation from the database using the provided id
+            ViewBag.acsses = HttpContext.Session.GetString("acsses");
+            var reservation = await _context.Reservations.FindAsync(id);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            return View(reservation);
+        }
+
     }
 }
