@@ -55,23 +55,19 @@ namespace Project.Controllers
         {
             return View(new User());
         }
-        public JsonResult IsEmailExist(string Email)
-        {
-            return Json(data: !_dbcontext.Users.Any(u => u.Email == Email));
-        }
+        
         [HttpPost]
         public IActionResult Signin(User user)
         {
-            var isEmailExist = _dbcontext.Users.Any(u => u.Email == user.Email);
             if (ModelState.IsValid)
             {
-                if (isEmailExist)
+                if (_dbcontext.Users.Any(u => u.Email == user.Email))
                 {
                     // Add an error message to the view model.
                     ModelState.AddModelError("Email", "This email address is already registered.");
                 }
-                if (CheckPassowrd(user.Password))
-                {
+                else if (CheckPassowrd(user.Password))
+                    {
                     if (user.Password != user.ConfirmPassword)
                     {
                         ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
