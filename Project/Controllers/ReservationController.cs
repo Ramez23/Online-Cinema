@@ -34,7 +34,7 @@ namespace Project.Controllers
                 var maxPayId = await _context.Reservations.MaxAsync(r => r.Pay_Id);
                 var movie = await _context.Movies.FirstOrDefaultAsync(m => m.Movie_Id == reservation.M_Id);
           
-                var seat = _context.Seats.FirstOrDefault(s => s.Seat_Num == reservation.Seat_Id && s.Hall.Hall_Id == movie.Hall.Hall_Id);
+                var seat = _context.Seats.FirstOrDefault(s => s.Seat_Num == reservation.Seat_Id);
 
                 if (seat.IsSold == false)
                 {
