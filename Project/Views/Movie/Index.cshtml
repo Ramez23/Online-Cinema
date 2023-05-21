@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Project.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+    
+	    if(ViewBag.acssess   != null)
+	    {
+		     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	    }
+	
+}
+<br />
+<h1>Movies List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi-plus-square"></i>&nbsp; New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie_Pic)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+              @*  @Html.DisplayFor(modelItem => item.Movie_Pic) *@
+					<a asp-action="Details" asp-route-id="@item.Movie_Id">
+                        <img src="~/Images/@item.Movie_Pic" alt="movie_image_here" style="width:70px;height:70px">
+                    </a>
+                    
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Movie_Id"><i class="bi bi-pencil-square"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Movie_Id"><i class="bi bi-eye"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Movie_Id"><i class="bi bi-trash3"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

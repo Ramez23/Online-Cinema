@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Project.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+
+   if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+
+}
+<div class="search-container">
+    <form action="/search" method="post">
+        <input type="text" name="searchTerm" placeholder="Search..." >
+        <button asp-controller="movies" asp-action="Search" type="submit">Search</button>
+    </form>
+</div>
+<section class="movies">
+    <h2>Now Showing</h2>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <div class="movie-container">
+                <div class="movie">
+                    <img src="~/Images/@item.Movie_Pic" alt="Movie 1" width=150px height=200px>
+                    <div class="overlay">
+                        <h3>@item.Title</h3>
+                        <p>@item.Genre1</p>
+                        <ul>
+                            <li class="time">@item.Date</li>
+                        </ul>
+                        <a asp-controller="movies" asp-action="Booking" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</section>

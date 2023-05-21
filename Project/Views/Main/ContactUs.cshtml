@@ -1,0 +1,84 @@
+﻿@{
+	ViewData["Title"] = "ContactUs";
+	if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+	
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Us</title>
+</head>
+
+<body class="contBody">
+	<div class="container">
+		<h1>Contact Us</h1>
+		<div class="contact-info">
+			<h2>Hotlines:</h2>
+			<ul>
+				<li>General inquiries: 1-800-123-4567</li>
+				<li>Emergency assistance: 1-800-555-1212</li>
+				<li>Customer support: 1-888-777-9999</li>
+			</ul>
+			<h2>Email:</h2>
+			<a href="mailto:contact@example.com">contact@example.com</a>
+			<h2>Location:</h2>
+			<p>123 Main St, Anytown USA 12345</p>
+			<h2>Submit a form:</h2>
+			<a asp-controller="main" asp-action="ContactForm">Press here!</a>
+			<h2>Social Media:</h2>
+			<ul class="social-media">
+				<li><a href="https://www.facebook.com/example">Facebook</a></li>
+				<li><a href="https://www.twitter.com/example">Twitter</a></li>
+				<li><a href="https://www.instagram.com/example">Instagram</a></li>
+			</ul>
+
+		</div>
+		
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+﻿@{
+	ViewData["Title"] = "Contact Us Form";
+	if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+
+}
+<div class="contact-form">
+	<form action="submit-form.php" method="post">
+		<label class="contact-label" for="name">Name:</label>
+		<input class="contact-input" type="text" id="name" name="name" required>
+
+		<label class="contact-label" for="email">Email:</label>
+		<input class="contact-input" type="email" id="email" name="email" required>
+
+		<label class="contact-label" for="message">Message:</label>
+		<textarea class="contact-text" id="message" name="message" required></textarea>
+
+		<button class="contact-btn" type="submit">Send</button>
+	</form>
+</div>
+

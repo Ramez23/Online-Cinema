@@ -1,0 +1,101 @@
+@model Project.Models.BookingViewModel
+
+@{
+    ViewData["Title"] = "Booking";
+
+    if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking</title>
+</head>
+<body>
+    <div class="book">
+        @using (Html.BeginForm("Book", "Reservations", FormMethod.Post))
+        {
+            <div class="movie-cont">
+                <label> Movie:</label>
+                <select name="M_Id">
+                    @foreach (var item in Model.Movies)
+                    {
+                        <option value="@item.Movie_Id">@item.Title</option>
+                    }
+                </select>
+
+
+                
+
+                <div class="date">
+                    <label> Date:</label>
+                    <input type="date" name="Date" />
+                    <label> Time:</label>
+                    <input type="time" name="Time" />
+                </div>
+            </div>
+
+            <label style="color:red">Tickets:</label>
+            <input style="color:red" class="Tickets" type="number" name="TicketCount" id="ticketCount" min="1">
+            <label style="color:red"> Price: <span id="price">100</span>EGP</label>
+            <br>
+
+            <label>Choose a seat:</label>
+            <select id="seatSelect" name="Seat_Id">
+                @for (int i = 1; i <= 70; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+
+
+            <ul class="showcase">
+                <li><div class="Available"></div>Available</li>
+                <li><div class="Booked"></div>Booked</li>
+            </ul>
+
+            <div class="cont">
+                <div class="screen">screen</div>
+
+                @for (var row = 0; row < 7; row++)
+                 {
+                    <div class="row">
+                     @for (var seat = 1; seat <= 10; seat++)
+                     {
+                          var seatNumber = row * 10 + seat; // Calculate seat number
+                
+                // Check if there is a reservation for the seat
+                            bool isSold = Model.Seats.Any(s => s.Seat_Id == seatNumber && s.IsSold);
+
+                         <div class="seat @(isSold ? "sold" : "")">
+                         <span class="seat-number">@seatNumber</span>
+                        </div>
+            }
+                     </div>
+                }
+
+                <input type="submit" value="Book" />
+            </div>
+        }
+    </div>
+
+    <script>
+        document.getElementById('ticketCount').addEventListener('input', function (e) {
+            const count = e.target.value;
+            document.getElementById('price').innerText = 100 * count;  // Assuming the price of one ticket is 100 egp
+        });
+
+        const cont = document.querySelector('.cont');
+        cont.addEventListener('click', (e) => {
+            if (e.target.classList.contains('seat') && !e.target.classList.contains('sold')) {
+                e.target.classList.toggle('selected');
+                updateSelectedCount();
+            }
+        });
+    </script>
+
+</body>
+</html>

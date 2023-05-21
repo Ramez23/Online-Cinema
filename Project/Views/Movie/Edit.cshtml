@@ -1,0 +1,63 @@
+﻿@model Project.Models.Movie
+
+@{
+	ViewData["Title"] = "Edit";
+
+}
+
+<h1 style="padding-top:50px">Edit</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row" style="justify-content:center;">
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Movie_Id" />
+			<div class="form-group">
+				<label asp-for="Title" class="control-label"></label>
+				<input asp-for="Title" class="form-control" />
+				<span asp-validation-for="Title" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Genre1" class="control-label"></label>
+				<input asp-for="Genre1" class="form-control" />
+				<span asp-validation-for="Genre1" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Duration" class="control-label"></label>
+				<input asp-for="Duration" class="form-control" />
+				<span asp-validation-for="Duration" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Date" class="control-label"></label>
+				<input asp-for="Date" class="form-control" />
+				<span asp-validation-for="Date" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Rating" class="control-label"></label>
+				<input asp-for="Rating" class="form-control" />
+				<span asp-validation-for="Rating" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Movie_Pic" class="control-label"></label>
+				<input asp-for="Movie_Pic" class="form-control" />
+				<span asp-validation-for="Movie_Pic" class="text-danger"></span>
+			</div>
+			<div class="form-group" style="margin:20px 0 50px 0;display:inline-block">
+				<input type="submit" value="Save" class="btn btn-primary" />
+				|
+				<a asp-action="Index" class="btn btn-info">Back to List</a>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+
+
+@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

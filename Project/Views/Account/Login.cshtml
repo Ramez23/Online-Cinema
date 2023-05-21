@@ -1,0 +1,22 @@
+﻿@model User
+@{
+	ViewData["Title"] = "Login";
+	if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+}
+<strong><span style="color:red;">@Html.ValidationMessageFor(x => x.Password)</span></strong>
+<form asp-controller="Account" asp-action="Login" method="post" class="login-form">
+	<div class="form-group">
+		<label for="Email">Email address</label>
+		<input type="email" class="form-control" id="Email" name="Email" placeholder="Enter email" required>
+		<span class="text-danger" asp-validation-for="Email"></span>
+	</div>
+	<div class="form-group">
+		<label for="Password">Password</label>
+		<input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
+		<span class="text-danger" asp-validation-for="Password"></span>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>

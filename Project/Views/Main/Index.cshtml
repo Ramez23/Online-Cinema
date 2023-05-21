@@ -1,0 +1,15 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	
+	if (ViewBag.acsses == "Admin")
+	{
+		Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	}
+
+}
+<section class="banner">
+	<h1>Book your Movies Ticket Now!</h1>
+	<p>Don't miss out on the latest movies. Book your cinema ticket online today!</p>
+	<a asp-controller="movies" asp-action="index" class="btn">Book Now</a>
+</section>
+
